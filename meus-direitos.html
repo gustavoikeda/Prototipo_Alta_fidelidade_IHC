@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meus Direitos</title>
+<style>
+/* Fonte opcional: se estiver sem internet, o navegador usa a fonte do sistema */
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap");
+
+/* Reset mínimo (substitui o preflight do Tailwind) */
+html { line-height: 1.5; -webkit-text-size-adjust: 100%; }
+h1, h2 { font-size: inherit; font-weight: inherit; }
+button { background: transparent; border: 0; padding: 0; color: inherit; cursor: pointer; }
+svg { display: block; }
+strong { font-weight: 700; }
+
+:root {
+  font-family: "Atkinson Hyperlegible", system-ui, sans-serif;
+  color: #172a3a;
+  background: #f3f7f5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+
+body { margin: 0; min-width: 320px; min-height: 100vh; }
+
+button { font: inherit; }
+
+button:focus-visible { outline: 3px solid #f5b82e; outline-offset: 3px; }
+
+.app-shell {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(circle at 8% 8%, rgba(22, 118, 92, 0.08), transparent 27rem),
+    #f3f7f5;
+}
+
+.app-header {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 16px clamp(20px, 5vw, 72px);
+  color: #ffffff;
+  background: #123f36;
+  box-shadow: 0 2px 12px rgba(12, 43, 36, 0.15);
+}
+
+.brand,
+.official-note,
+.button,
+.trust-list div,
+.location,
+.saved-message,
+footer { display: flex; align-items: center; }
+
+.brand { gap: 11px; font-size: 21px; font-weight: 700; letter-spacing: -0.02em; }
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  color: #123f36;
+  background: #e7b43e;
+  border-radius: 12px;
+}
+
+.official-note { gap: 8px; color: #dcebe7; font-size: 15px; }
+
+.icon {
+  flex: 0 0 auto;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.content-wrap {
+  width: min(100%, 700px);
+  flex: 1;
+  margin: 0 auto;
+  padding: clamp(32px, 6vw, 64px) 24px 40px;
+}
+
+.screen { width: 100%; animation: screen-in 300ms ease-out; }
+.screen.no-anim { animation: none; }
+
+@keyframes screen-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.home-screen { text-align: center; }
+
+.eyebrow {
+  color: #16765c;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-icon,
+.success-mark {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  margin: 22px auto;
+  color: #ffffff;
+  background: #16765c;
+  border-radius: 24px;
+  box-shadow: 0 12px 28px rgba(22, 118, 92, 0.2);
+}
+
+h1, h2, p { margin: 0; }
+
+h1 {
+  max-width: 620px;
+  margin-right: auto;
+  margin-left: auto;
+  color: #123f36;
+  font-size: clamp(36px, 7vw, 52px);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+}
+
+h2 { color: #123f36; font-size: 27px; line-height: 1.2; letter-spacing: -0.02em; }
+
+.lead {
+  max-width: 560px;
+  margin: 20px auto 0;
+  color: #52635e;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.trust-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin: 30px 0;
+  color: #354b44;
+}
+
+.trust-list div { gap: 7px; }
+.trust-list .icon { color: #16765c; }
+
+.home-actions { max-width: 480px; display: grid; gap: 10px; margin: 0 auto; }
+
+.button {
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 12px 18px;
+  color: #123f36;
+  background: transparent;
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.button:hover { background: #e5eeeb; }
+.button:active { transform: translateY(1px); }
+
+.button-primary {
+  color: #ffffff;
+  background: #16765c;
+  box-shadow: 0 8px 20px rgba(22, 118, 92, 0.18);
+}
+
+.button-primary:hover { background: #0f614a; box-shadow: 0 10px 24px rgba(22, 118, 92, 0.26); }
+
+.button-large { min-height: 60px; padding: 16px 22px; font-size: 18px; }
+
+.button-primary .icon:last-child:not(:first-child) { margin-left: auto; }
+
+.button-quiet { padding: 10px 12px; color: #36534b; }
+.button-quiet.is-speaking { background: #e5eeeb; }
+
+.screen-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 36px; }
+
+.progress-copy {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: #47645b;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.progress-track { height: 9px; overflow: hidden; background: #dce7e3; border-radius: 999px; }
+
+.progress-track span {
+  display: block;
+  height: 100%;
+  background: #16765c;
+  border-radius: inherit;
+  transition: width 300ms ease;
+}
+
+.question-card {
+  min-height: 245px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 24px 0;
+  padding: 42px;
+  text-align: center;
+  background: #ffffff;
+  border: 1px solid #dfe9e6;
+  border-radius: 24px;
+  box-shadow: 0 12px 40px rgba(18, 63, 54, 0.07);
+}
+
+.question-number {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 22px;
+  color: #ffffff;
+  background: #16765c;
+  border-radius: 50%;
+  font-weight: 700;
+}
+
+.question-card h2 { max-width: 500px; font-size: clamp(26px, 5vw, 34px); }
+.question-card p { margin-top: 14px; color: #687b75; font-size: 17px; }
+
+.answer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.answer-button {
+  min-height: 110px;
+  flex-direction: column;
+  background: #ffffff;
+  border: 2px solid #ccdbd6;
+  font-size: 20px;
+}
+
+.answer-button:hover { color: #0f614a; background: #edf6f3; border-color: #16765c; }
+
+.answer-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  color: #16765c;
+  background: #e6f2ee;
+  border-radius: 50%;
+}
+
+.answer-icon-no { color: #9b433d; background: #f7e9e7; font-size: 31px; line-height: 1; }
+
+.button-back { margin: 18px auto 0; color: #587069; }
+
+.result-screen { text-align: center; }
+
+.success-mark { width: 66px; height: 66px; margin-bottom: 18px; background: #16765c; border-radius: 50%; }
+
+.eyebrow.success { margin-bottom: 10px; }
+
+.result-screen h1 { font-size: clamp(36px, 7vw, 46px); }
+
+.benefit-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 18px;
+  margin: 32px 0 20px;
+  padding: 26px;
+  text-align: left;
+  background: #ffffff;
+  border: 1px solid #d8e5e1;
+  border-radius: 22px;
+  box-shadow: 0 12px 36px rgba(18, 63, 54, 0.07);
+}
+
+.benefit-icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  color: #16765c;
+  background: #e4f1ed;
+  border-radius: 14px;
+}
+
+.card-label {
+  display: block;
+  margin-bottom: 6px;
+  color: #16765c;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.benefit-card p { margin-top: 9px; color: #5a6d67; font-size: 17px; line-height: 1.45; }
+
+.location {
+  grid-column: 1 / -1;
+  gap: 10px;
+  padding-top: 18px;
+  color: #354b44;
+  border-top: 1px solid #e1eae7;
+}
+
+.location .icon { color: #16765c; }
+
+.result-screen > .button-primary { width: 100%; }
+
+.disclaimer { margin-top: 17px; color: #71817c; font-size: 14px; line-height: 1.4; }
+
+.checklist-title { display: flex; align-items: center; gap: 18px; margin-bottom: 30px; }
+
+.checklist-title h1 { margin-top: 6px; font-size: clamp(30px, 6vw, 42px); text-align: left; }
+
+.check-progress { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 14px; color: #536861; }
+.check-progress strong { color: #123f36; }
+
+.document-list { display: grid; gap: 12px; margin-bottom: 24px; }
+
+.document-item {
+  width: 100%;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  color: #263e37;
+  text-align: left;
+  background: #ffffff;
+  border: 2px solid #d7e3df;
+  border-radius: 15px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 18px;
+  transition: border 160ms ease, background 160ms ease;
+}
+
+.document-item:hover { border-color: #7eada0; }
+.document-item.is-checked { color: #1c5948; background: #eaf4f1; border-color: #16765c; }
+
+.checkbox {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  color: #ffffff;
+  border: 2px solid #92a8a1;
+  border-radius: 7px;
+}
+
+.is-checked .checkbox { background: #16765c; border-color: #16765c; }
+
+.checklist-screen > .button-primary { width: 100%; }
+
+.saved-message {
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 13px;
+  color: #155743;
+  background: #e7f2ee;
+  border-radius: 12px;
+}
+
+footer {
+  justify-content: center;
+  gap: 7px;
+  padding: 18px 24px;
+  color: #667b74;
+  font-size: 13px;
+  border-top: 1px solid #dde7e4;
+}
+
+@media (max-width: 560px) {
+  .app-header { min-height: 66px; padding: 12px 18px; }
+  .official-note span { display: none; }
+  .content-wrap { padding: 30px 18px; }
+  .hero-icon { width: 66px; height: 66px; margin: 18px auto; border-radius: 20px; }
+  .lead { font-size: 18px; }
+  .question-card { min-height: 220px; padding: 30px 20px; }
+  .benefit-card { padding: 20px; }
+  .check-progress { flex-direction: column; gap: 3px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+<main class="app-shell">
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-mark" id="brand-icon"></span>
+      <span>Meus Direitos</span>
+    </div>
+    <div class="official-note">
+      <span id="official-icon" style="display:contents"></span>
+      <span>App oficial e seguro</span>
+    </div>
+  </header>
+
+  <div class="content-wrap" id="app"></div>
+
+  <footer>
+    <span id="footer-icon" style="display:contents"></span>
+    Nunca informe senhas ou faça pagamentos.
+  </footer>
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  var questions = [
+    "Você mora com crianças?",
+    "Alguém da família tem carteira assinada?",
+    "Sua renda está baixa este mês?"
+  ];
+
+  var documents = [
+    "Documento com foto e CPF",
+    "Comprovante de endereço",
+    "Certidão de nascimento dos filhos"
+  ];
+
+  var iconPaths = {
+    "arrow-left": '<path d="m15 18-6-6 6-6" />',
+    "check": '<path d="m5 12 4 4L19 6" />',
+    "chevron-right": '<path d="m9 18 6-6-6-6" />',
+    "clipboard": '<rect width="14" height="16" x="5" y="4" rx="2" /><path d="M9 4V2h6v2M9 9h6M9 13h6" />',
+    "download": '<path d="M12 3v12m0 0 4-4m-4 4-4-4" /><path d="M5 19h14" />',
+    "home": '<path d="m3 11 9-8 9 8" /><path d="M5 10v10h14V10M9 20v-6h6v6" />',
+    "map-pin": '<path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" />',
+    "search": '<circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 4 4" />',
+    "shield": '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Zm-3-10 2 2 4-5" />',
+    "volume": '<path d="M11 5 6 9H3v6h3l5 4V5Z" /><path d="M15 9a4 4 0 0 1 0 6M18 6a8 8 0 0 1 0 12" />'
+  };
+
+  function icon(name, size) {
+    size = size || 22;
+    return '<svg aria-hidden="true" class="icon" fill="none" height="' + size +
+      '" width="' + size + '" viewBox="0 0 24 24">' + iconPaths[name] + '</svg>';
+  }
+
+  function button(className, action, inner, extra) {
+    return '<button class="button ' + className + '" data-action="' + action + '" type="button"' +
+      (extra || '') + '>' + inner + '</button>';
+  }
+
+  /* Protótipo: o botão "Ouvir" é apenas visual, sem função */
+  function listenButton() {
+    return '<button class="button button-quiet" type="button">' + icon('volume', 20) + 'Ouvir</button>';
+  }
+
+  /* ---------- Estado ---------- */
+  var state = { screen: "home", qi: 0, answers: [], checked: [] };
+  var lastScreen = null;
+
+  /* ---------- Telas ---------- */
+  function homeView() {
+    return '<section class="screen home-screen">' +
+      '<div class="eyebrow">Benefícios para você</div>' +
+      '<div class="hero-icon">' + icon('search', 36) + '</div>' +
+      '<h1>Saiba quais benefícios você pode receber</h1>' +
+      '<p class="lead">Responda 3 perguntas simples. É gratuito, seguro e leva menos de dois minutos.</p>' +
+      '<div class="trust-list">' +
+        '<div>' + icon('check', 19) + 'Sem cadastro</div>' +
+        '<div>' + icon('check', 19) + 'Sem pedir senha ou dinheiro</div>' +
+      '</div>' +
+      '<div class="home-actions">' +
+        button('button-primary button-large', 'start', 'Descobrir meus direitos' + icon('chevron-right'), ' data-fk="start"') +
+        listenButton() +
+      '</div>' +
+    '</section>';
+  }
+
+  function questionsView() {
+    var n = state.qi + 1, total = questions.length;
+    var pct = Math.round((n / total) * 100);
+    return '<section class="screen question-screen">' +
+      '<div class="screen-toolbar">' +
+        button('button-quiet', 'home', icon('home', 20) + 'Início') +
+        listenButton() +
+      '</div>' +
+      '<div class="progress-copy"><span>PERGUNTA ' + n + ' DE ' + total + '</span><span>' + pct + '%</span></div>' +
+      '<div aria-label="Progresso: pergunta ' + n + ' de ' + total + '" class="progress-track" role="progressbar" ' +
+        'aria-valuemin="1" aria-valuemax="' + total + '" aria-valuenow="' + n + '">' +
+        '<span style="width:' + pct + '%"></span></div>' +
+      '<div class="question-card">' +
+        '<div class="question-number">' + n + '</div>' +
+        '<h2>' + questions[state.qi] + '</h2>' +
+        '<p>Escolha uma opção abaixo para continuar.</p>' +
+      '</div>' +
+      '<div class="answer-grid">' +
+        button('answer-button', 'answer-sim',
+          '<span class="answer-icon">' + icon('check', 27) + '</span><strong>Sim</strong>') +
+        button('answer-button', 'answer-nao',
+          '<span class="answer-icon answer-icon-no">×</span><strong>Não</strong>') +
+      '</div>' +
+      button('button-back', 'back', icon('arrow-left', 20) + 'Voltar') +
+    '</section>';
+  }
+
+  function resultView() {
+    return '<section class="screen result-screen">' +
+      '<div class="screen-toolbar">' +
+        button('button-quiet', 'home', icon('home', 20) + 'Início') +
+        listenButton() +
+      '</div>' +
+      '<div class="success-mark">' + icon('check', 34) + '</div>' +
+      '<div class="eyebrow success">Resultado encontrado</div>' +
+      '<h1>Boa notícia!</h1>' +
+      '<p class="lead">Encontramos um benefício que combina com suas respostas.</p>' +
+      '<div class="benefit-card">' +
+        '<div class="benefit-icon">' + icon('clipboard', 27) + '</div>' +
+        '<div>' +
+          '<span class="card-label">VOCÊ PODE TER DIREITO</span>' +
+          '<h2>Auxílio Alimentação</h2>' +
+          '<p>Ajuda da prefeitura para famílias com crianças e renda baixa.</p>' +
+        '</div>' +
+        '<div class="location">' + icon('map-pin', 21) +
+          '<span>Solicite no <strong>CRAS do seu bairro</strong></span></div>' +
+      '</div>' +
+      button('button-primary button-large', 'to-checklist', 'Ver documentos necessários' + icon('chevron-right')) +
+      '<p class="disclaimer">O resultado é uma orientação inicial. A confirmação é feita pelo CRAS.</p>' +
+    '</section>';
+  }
+
+  function checklistView() {
+    var done = state.checked.length, total = documents.length;
+    var items = documents.map(function (doc, i) {
+      var on = state.checked.indexOf(i) !== -1;
+      return '<button aria-pressed="' + on + '" class="document-item' + (on ? ' is-checked' : '') + '" ' +
+        'data-action="toggle" data-index="' + i + '" data-fk="doc-' + i + '" type="button">' +
+        '<span class="checkbox">' + (on ? icon('check', 19) : '') + '</span>' +
+        '<span>' + doc + '</span></button>';
+    }).join('');
+
+    return '<section class="screen checklist-screen">' +
+      '<div class="screen-toolbar">' +
+        button('button-quiet', 'to-result', icon('arrow-left', 20) + 'Voltar') +
+        listenButton() +
+      '</div>' +
+      '<div class="checklist-title">' +
+        '<div class="benefit-icon">' + icon('clipboard', 27) + '</div>' +
+        '<div><div class="eyebrow">Prepare-se para ir ao CRAS</div><h1>Documentos para levar</h1></div>' +
+      '</div>' +
+      '<div class="check-progress"><strong>' + done + ' de ' + total + ' separados</strong>' +
+        '<span>' + (done === total ? 'Tudo pronto!' : 'Marque o que já separou') + '</span></div>' +
+      '<div class="document-list">' + items + '</div>' +
+      /* Protótipo: o botão "Guardar lista" é apenas visual, sem função */
+      '<button class="button button-primary button-large" type="button">' +
+        icon('download') + 'Guardar lista no celular</button>' +
+    '</section>';
+  }
+
+  /* ---------- Renderização ---------- */
+  var app = document.getElementById("app");
+
+  function render() {
+    var active = document.activeElement;
+    var focusKey = active && active.dataset ? active.dataset.fk : null;
+
+    var views = { home: homeView, questions: questionsView, result: resultView, checklist: checklistView };
+    app.innerHTML = views[state.screen]();
+
+    if (state.screen === lastScreen) {
+      var section = app.querySelector(".screen");
+      if (section) section.classList.add("no-anim");
+    }
+    lastScreen = state.screen;
+
+    if (focusKey) {
+      var again = app.querySelector('[data-fk="' + focusKey + '"]');
+      if (again) again.focus();
+    }
+  }
+
+  function setScreen(name) {
+    state.screen = name;
+    render();
+  }
+
+  /* ---------- Ações ---------- */
+  function answer(value) {
+    state.answers[state.qi] = value;
+    if (state.qi === questions.length - 1) {
+      setScreen("result");
+    } else {
+      state.qi += 1;
+      render();
+    }
+  }
+
+  var actions = {
+    "start": function () { state.qi = 0; state.answers = []; setScreen("questions"); },
+    "home": function () { setScreen("home"); },
+    "back": function () {
+      if (state.qi === 0) { setScreen("home"); return; }
+      state.qi -= 1;
+      render();
+    },
+    "answer-sim": function () { answer("sim"); },
+    "answer-nao": function () { answer("nao"); },
+    "to-checklist": function () { setScreen("checklist"); },
+    "to-result": function () { setScreen("result"); },
+    "toggle": function (el) {
+      var i = parseInt(el.dataset.index, 10);
+      var pos = state.checked.indexOf(i);
+      if (pos === -1) state.checked.push(i); else state.checked.splice(pos, 1);
+      render();
+    }
+  };
+
+  app.addEventListener("click", function (e) {
+    var el = e.target.closest("[data-action]");
+    if (!el || !actions[el.dataset.action]) return;
+    actions[el.dataset.action](el);
+  });
+
+  /* Ícones fixos do cabeçalho e rodapé */
+  document.getElementById("brand-icon").innerHTML = icon("shield", 24);
+  document.getElementById("official-icon").innerHTML = icon("shield", 18);
+  document.getElementById("footer-icon").innerHTML = icon("shield", 16);
+
+  render();
+})();
+</script>
+</body>
+</html>
